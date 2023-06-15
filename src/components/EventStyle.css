@@ -1,0 +1,114 @@
+/* Solve: Make flex display 3 in a column, then unknown rows */
+* {
+  margin: 0;
+}
+.headerContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.header {
+  background-color: rgb(0, 131, 145);
+  text-align: center;
+  color: white;
+  width: 1500px;
+  padding: 40px 0;
+}
+.chosenCardsContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.chosenCards {
+  display: flex;
+  gap: 20px;
+  height: 500px;
+}
+
+.kostnadsfri {
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  background-color: rgb(0, 107, 171);
+  height: 100%;
+  width: 740px;
+  color: white;
+  word-wrap: break-word;
+}
+.kostnadsfriText {
+  padding: 30px;
+  word-wrap: break-word;
+}
+.other {
+  height: 100%;
+  width: 740px;
+}
+.idag {
+  display: flex;
+  background-color: rgb(255, 205, 55);
+  align-items: center;
+  justify-content: center;
+  /* line-height: 240px; */
+  font-size: 2rem;
+  height: 240px;
+  margin-bottom: 10px;
+}
+.barn {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: rgb(0, 131, 145);
+  height: 250px;
+  width: 100%;
+  color: white;
+  font-size: 1.5rem;
+}
+.chosenImg {
+  height: 100%;
+  max-width: 100%;
+}
+
+.eventsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.eventCard:hover {
+  background-color: rgb(248, 253, 255);
+  cursor: pointer;
+  scale: 1.005;
+}
+
+.eventCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  border: 1px solid rgb(196, 196, 196);
+  margin: 0 20px;
+  width: 1500px;
+  transition: all ease-in-out 0.3s;
+}
+
+.activityTitle {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  font-size: 1.5rem;
+}
+.activityAddress {
+  font-size: 0.8rem;
+}
+
+.activityDate {
+  font-size: 0.7rem;
+  padding-right: 20px;
+}
+
+.cardImage {
+  height: 100px;
+  width: 177px;
+  object-fit: cover;
+}
