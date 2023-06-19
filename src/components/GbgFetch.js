@@ -8,7 +8,7 @@ function GbgFetch() {
   const [gbgResult, setGbgResult] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001")
+    fetch("http://68.183.13.152/api")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
