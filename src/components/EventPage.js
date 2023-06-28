@@ -1,10 +1,11 @@
 //TO DO
+// 6. Make site dynamic/for phones
 // 1. Refine fetch & put correct information on ChosenCards
 // 2. Why doesn't the adresses work?
 // 5. Insert and animate logo
-// 6. Make site dynamic/for phones
 // 7. Make an eventcard clickable -> for more information
 // 8. Rotate information on "today"
+// 9. too much info on chosen card should give a scroll
 
 //Last
 // Create search field
@@ -14,6 +15,8 @@ import EventStyle from "./EventStyle.css";
 import { useState, useEffect } from "react";
 
 function EventPage(props) {
+  const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
+
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "2-digit", day: "2-digit" };
     const date = new Date(dateString);
@@ -26,13 +29,25 @@ function EventPage(props) {
     return time.toLocaleTimeString("sv-SE", options);
   };
 
+  const todayFiveArray = props.activities.slice(0, 5);
+  // {todayFiveArray[0].title}
+  // console.log(todayFiveArray);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentActivityIndex(
+        (prevIndex) => (prevIndex + 1) % todayFiveArray.length
+      );
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <main className="headerContainer">
         <div className="header">
-          <h1>
-            - OBS! Work in progress! <br /> KulturKajen{" "}
-          </h1>
+          <h1>KulturKajen </h1>
           <p>Skepp O'hoj! Dags för Skoj!</p>
         </div>
       </main>
@@ -51,7 +66,9 @@ function EventPage(props) {
             </div>
           </div>
           <div className="other">
-            <div className="idag">{props.activities[6].title}</div>
+            <div className="idag">
+              <p>{todayFiveArray[currentActivityIndex].title}</p>
+            </div>
             <div className="barn">
               <img
                 className="chosenImg"
