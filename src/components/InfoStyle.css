@@ -1,0 +1,14 @@
+/* body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
+.main {
+  /* position: absolute;
+  z-index: 2; */
+  background-color: rgb(255, 205, 55);
+  padding: 40px 20px;
+  height: 300px;
+}
