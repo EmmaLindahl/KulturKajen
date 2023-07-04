@@ -3,6 +3,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import EventPage from "./EventPage";
+import InfoCard from "./InfoCard";
 
 function GbgFetch() {
   const [gbgResult, setGbgResult] = useState([]);
@@ -17,7 +18,12 @@ function GbgFetch() {
       .catch((error) => console.error(error));
   }, []);
 
-  return <>{gbgResult.length > 0 && <EventPage activities={gbgResult} />}</>;
+  return (
+    <>
+      {gbgResult.length > 0 && <EventPage activities={gbgResult} />}
+      {gbgResult.length > 0 && <InfoCard activities={gbgResult} />}
+    </>
+  );
 }
 
 export default GbgFetch;

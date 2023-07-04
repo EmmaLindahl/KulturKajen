@@ -1,18 +1,16 @@
 //TO DO
-// 6. Make site dynamic/for phones
+// 7. Make an eventcard clickable -> for more information
 // 1. Refine fetch & put correct information on ChosenCards
 // 2. Why doesn't the adresses work?
 // 5. Insert and animate logo
-// 7. Make an eventcard clickable -> for more information
-// 8. Rotate information on "today"
-// 9. too much info on chosen card should give a scroll
 
 //Last
 // Create search field
 // Create date search field
 
 import EventStyle from "./EventStyle.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import InfoCard from "./InfoCard";
 
 function EventPage(props) {
   const [currentActivityIndex, setCurrentActivityIndex] = useState(0);
@@ -30,8 +28,6 @@ function EventPage(props) {
   };
 
   const todayFiveArray = props.activities.slice(0, 5);
-  // {todayFiveArray[0].title}
-  // console.log(todayFiveArray);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -42,6 +38,16 @@ function EventPage(props) {
 
     return () => clearInterval(interval);
   }, []);
+
+  const [showInfoCard, setShowInfoCard] = useState(false);
+  // function toggleInfoCard() {
+  //   setShowInfoCard(!showInfoCard);
+  // }
+  function toggleInfoCard(index) {
+    setSelectedActivityIndex(index === selectedActivityIndex ? null : index);
+  }
+
+  const [selectedActivityIndex, setSelectedActivityIndex] = useState(null);
 
   return (
     <>
@@ -84,43 +90,54 @@ function EventPage(props) {
         {props.activities.map((activity) => {
           return (
             <>
-              <main className="eventCard">
-                <section>
-                  <div className="activityTitle">
-                    {activity.image ? (
-                      <>
+              <React.Fragment key={activity.id}>
+                <main
+                  className="eventCard"
+                  onClick={() => toggleInfoCard(activity.id)}
+                >
+                  {selectedActivityIndex === activity.id && (
+                    <div className="overlay">
+                      <InfoCard />
+                    </div>
+                  )}
+                  <section>
+                    <div className="activityTitle">
+                      {activity.image ? (
+                        <>
+                          <img
+                            className="cardImage"
+                            src={`${activity.image.host}${activity.image.path}`}
+                            alt="Activity Image"
+                          />
+                        </>
+                      ) : (
                         <img
                           className="cardImage"
-                          src={`${activity.image.host}${activity.image.path}`}
-                          alt="Activity Image"
+                          src="NoImg.jpg"
+                          alt="Default Image"
                         />
-                      </>
-                    ) : (
-                      <img
-                        className="cardImage"
-                        src="NoImg.jpg"
-                        alt="Default Image"
-                      />
-                    )}
-                    {activity.title}
-                  </div>
-                  <div className="activityAddress">
-                    {/* {activity.unit.addsstreet} <br /> {activity.unit.name} */}
-                  </div>
-                </section>
-                <section>
-                  <div className="activityDate">
-                    <p>
-                      Tid: {formatTime(activity.startTime)} <br />
-                      Datum: {formatDate(activity.startTime)}
-                    </p>
-                  </div>
-                </section>
-              </main>
+                      )}
+                      {activity.title}
+                    </div>
+                    <div className="activityAddress">
+                      {/* {activity.unit.addsstreet} <br /> {activity.unit.name} */}
+                    </div>
+                  </section>
+                  <section>
+                    <div className="activityDate">
+                      <p>
+                        Tid: {formatTime(activity.startTime)} <br />
+                        Datum: {formatDate(activity.startTime)}
+                      </p>
+                    </div>
+                  </section>
+                </main>
+              </React.Fragment>
             </>
           );
         })}
       </main>
+      {/* <InfoCard /> */}
     </>
   );
 }
